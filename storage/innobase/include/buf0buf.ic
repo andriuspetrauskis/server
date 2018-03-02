@@ -113,9 +113,6 @@ UNIV_INLINE
 bool
 buf_page_peek_if_young(const buf_page_t* bpage)
 {
-	ut_ad(bpage->buf_fix_count > 0
-	      || buf_page_hash_lock_held_s_or_x(bpage));
-
 	/* FIXME: bpage->freed_page_clock is 31 bits */
 	return((buf_pool.freed_page_clock & ((1UL << 31) - 1))
 	       < (bpage->freed_page_clock
